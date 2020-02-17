@@ -28,5 +28,14 @@ Breadcrumbs::for('admin.business.window.create', function ($trail) {
     $trail->push('Window create', route('admin.business.window.create'));
 });
 
+Breadcrumbs::for('admin.business.window.store', function ($trail) {
+    $trail->push('Window store', route('admin.business.window.store'));
+});
+
+Breadcrumbs::for('admin.business.window.edit', function ($trail, $id) {
+    $trail->push('Window update', route('admin.business.window.edit', ['id' => $id]));
+});
+
+
 require __DIR__.'/auth.php';
 require __DIR__.'/log-viewer.php';

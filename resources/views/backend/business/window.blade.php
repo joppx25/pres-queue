@@ -2,10 +2,6 @@
 
 @section('title', app_name() . ' | ' . __('labels.backend.access.business.window'))
 
-@section('breadcrumb-links')
-    @include('backend.auth.user.includes.breadcrumb-links')
-@endsection
-
 @section('content')
 <div class="card">
     <div class="card-body">
@@ -21,6 +17,43 @@
                     <a href="{{ route('admin.business.window.create') }}" class="btn btn-success ml-1" data-toggle="tooltip" title="@lang('labels.general.create_new')"><i class="fas fa-plus-circle"></i></a>
                 </div><!--btn-toolbar-->                
             </div><!--col-->
+        </div>
+        
+        <div class="row mt-4">
+            <div class="col">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($windows as $window)
+                                <tr>
+                                    <td>{{ $window->name }}</td>
+                                    <td>
+                                        @if ($window->status)
+                                            <span class="badge badge-success" style="cursor:pointer">@lang('labels.general.active')</span>
+                                        @else
+                                            <span class="badge badge-danger" style="cursor:pointer">@lang('labels.general.inactive')</span>
+                                        @endif 
+                                    </td>
+                                    <td>
+                                        <div class="btn-group btn-group-sm" role="group" aria-label="@lang('labels.backend.access.users.user_actions')">
+                                            <a href="{{ route('admin.business.window.edit', ['id' => $window->id]) }}" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="@lang('buttons.general.crud.edit')">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 </div>
