@@ -36,6 +36,10 @@ Breadcrumbs::for('admin.business.window.edit', function ($trail, $id) {
     $trail->push('Window update', route('admin.business.window.edit', ['id' => $id]));
 });
 
+Breadcrumbs::for('admin.business.staff', function ($trail) {
+    $trail->push('Staff', route('admin.business.staff'));
+});
+
 
 require __DIR__.'/auth.php';
 require __DIR__.'/log-viewer.php';

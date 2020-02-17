@@ -20,6 +20,12 @@
                         Windows
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('admin.business.staff') }}">
+                        <i class="nav-icon fas fa-users"></i>
+                        Staff
+                    </a>
+                </li>
             @endif
 
             @if ($logged_in_user->isAdmin())

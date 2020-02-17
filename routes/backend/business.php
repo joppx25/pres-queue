@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Backend\Business\DashboardController;
 use App\Http\Controllers\Backend\Business\WindowController;
+use App\Http\Controllers\Backend\Business\StaffController;
 
 Route::group(['namespace' => 'Business', 'as' => 'business.'], function () {
     Route::group(['middleware' => ['auth', 'role:business']], function () {
@@ -11,5 +12,6 @@ Route::group(['namespace' => 'Business', 'as' => 'business.'], function () {
         Route::post('business/window/store', [WindowController::class, 'store'])->name('window.store');
         Route::get('business/window/edit/{id}', [WindowController::class, 'edit'])->name('window.edit');
         Route::post('business/window/update', [WindowController::class, 'update'])->name('window.update');
+        Route::get('business/staff', [StaffController::class, 'index'])->name('staff');
     });
 });
