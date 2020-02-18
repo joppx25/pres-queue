@@ -5,6 +5,7 @@
 @section('content')
     {{ html()->form('POST', route('admin.business.window.update'))->class('form-horizontal')->open() }}
         <input type="hidden" name="id" value="{{ $window->id }}">
+        <input type="hidden" name="business_id" value="{{ $businessId }}">
         <div class="card">
             <div class="card-body">
                 <div class="row">
@@ -22,7 +23,7 @@
                     <div class="col">
                         <div class="form-group row">
                             {{ html()->label('Window Name')->class('col-md-2 form-control-label')->for('window_name') }}
-
+                            
                             <div class="col-md-10">
                                 {{ html()->text('name', $window->name ?? '')
                                     ->class('form-control')
@@ -32,6 +33,18 @@
                                     ->autofocus() }}
                             </div><!--col-->
                         </div><!--form-group-->
+                        
+                        <div class="form-group row">
+                            <label for="assign" class="col-md-2 form-control-label">Assigned To</label>
+                            <div class="col-md-10">
+                                <select name="staff_id" id="assign" class="form-control" required>
+                                    <option value="">Select Staff</option>
+                                    @foreach ($staffs as $staff)
+                                        <option value="{{ $staff->id }}" {{ $staff->id === $window->staff_id? 'selected': ''}}>{{ $staff->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
 
                         <div class="form-group row">
                         {{ html()->label('Window Status')->class('col-md-2 form-control-label')->for('last_name') }}

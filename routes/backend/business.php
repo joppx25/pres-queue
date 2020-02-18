@@ -13,5 +13,7 @@ Route::group(['namespace' => 'Business', 'as' => 'business.'], function () {
         Route::get('business/window/edit/{id}', [WindowController::class, 'edit'])->name('window.edit');
         Route::post('business/window/update', [WindowController::class, 'update'])->name('window.update');
         Route::get('business/staff', [StaffController::class, 'index'])->name('staff');
+        Route::get('business/staff/create', [StaffController::class, 'create'])->name('staff.create');
+        Route::post('business/staff/store', [StaffController::class, 'store'])->name('staff.store');
     });
 });

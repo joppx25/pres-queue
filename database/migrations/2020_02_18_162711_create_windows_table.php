@@ -15,6 +15,8 @@ class CreateWindowsTable extends Migration
     {
         Schema::create('windows', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedInteger('business_id');
+            $table->unsignedInteger('staff_id');
             $table->string('name', 25);
             $table->unsignedTinyInteger('status');
             $table->timestamps();

@@ -40,6 +40,10 @@ Breadcrumbs::for('admin.business.staff', function ($trail) {
     $trail->push('Staff', route('admin.business.staff'));
 });
 
+Breadcrumbs::for('admin.business.staff.create', function ($trail) {
+    $trail->push('Create staff', route('admin.business.staff.create'));
+});
+
 
 require __DIR__.'/auth.php';
 require __DIR__.'/log-viewer.php';
