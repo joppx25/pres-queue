@@ -4,11 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Window extends Model
+class Queue extends Model
 {
     protected $fillable = [
-        'name',
-        'business_id',
+        'window_id',
+        'queue_number',
         'status',
     ];
 }

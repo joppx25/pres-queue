@@ -37,7 +37,13 @@
                                 <td>{{ $staff->name }}</td>
                                 <td>{{ $staff->details }}</td>
                                 <td>{{ $staff->image }}</td>
-                                <td class="btn-td">@include('backend.auth.user.includes.actions', ['user' => $user])</td>
+                                <td class="btn-td">
+                                    <div class="btn-group btn-group-sm" role="group" aria-label="@lang('labels.backend.access.users.user_actions')">
+                                        <a href="{{ route('admin.business.staff.edit', ['id' => $staff->id]) }}" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="@lang('buttons.general.crud.edit')">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                    </div>
+                                </td>
                             </tr>
                         @endforeach
                         </tbody>

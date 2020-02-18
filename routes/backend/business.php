@@ -15,5 +15,6 @@ Route::group(['namespace' => 'Business', 'as' => 'business.'], function () {
         Route::get('business/staff', [StaffController::class, 'index'])->name('staff');
         Route::get('business/staff/create', [StaffController::class, 'create'])->name('staff.create');
         Route::post('business/staff/store', [StaffController::class, 'store'])->name('staff.store');
+        Route::get('business/staff/edit', [StaffController::class, 'edit'])->name('staff.edit');
     });
 });

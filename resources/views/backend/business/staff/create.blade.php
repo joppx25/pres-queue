@@ -8,6 +8,7 @@
 
 @section('content')
     {{ html()->form('POST', route('admin.business.staff.store'))->attribute('enctype', 'multipart/form-data')->class('form-horizontal')->open() }}
+        <input type="hidden" name="business_id" value="{{ $businessId }}">
         <div class="card">
             <div class="card-body">
                 <div class="row">

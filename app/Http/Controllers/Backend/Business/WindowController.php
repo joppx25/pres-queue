@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Window;
 use App\Models\Auth\User;
 use App\Models\Staff;
+use App\Models\Queue;
 use Auth;
 
 class WindowController extends Controller
@@ -15,6 +16,15 @@ class WindowController extends Controller
     private function getBusinessId()
     {
         return (auth()->user() instanceof User)? auth()->user()->business()->first()->id : auth()->user()->business_id;
+    }
+    
+    private function getLastNumberServeInQueue()
+    {
+        $lastNumberServe = Queue::where('business_id', $this->getBusinessId())
+            ->orderBy('queue_number', 'desc')
+            ->first();
+            
+        return is_null($lastNumberServe)? 0 : $lastNumberServe->queue_number;
     }
     
     public function list()
@@ -41,6 +51,16 @@ class WindowController extends Controller
         $window->status      = $request->status;
         
         $window->save();
+        
+        $lastNumberServe = $this->getLastNumberServeInQueue();
+        
+        $queue = new Queue;
+        $queue->business_id  = $this->getBusinessId();
+        $queue->window_id    = $window->id;
+        $queue->queue_number = $lastNumberServe + 1;
+        $queue->status       = 1;
+        
+        $queue->save();
         
         return redirect()
             ->route('admin.business.window')
