@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Frontend\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Queue;
+use App\Models\Business;
 
 /**
  * Class DashboardController.
@@ -14,6 +16,7 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('frontend.user.dashboard');
+        $businesses = Business::with('queues')->get();
+        return view('frontend.user.dashboard', compact('businesses'));
     }
 }
