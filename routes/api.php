@@ -19,3 +19,4 @@ use App\Http\Controllers\Frontend\User\QueueController;
 });*/
 
 Route::post('reserve/queue', [QueueController::class, 'reserve'])->name('queue.reserve');
+Route::post('resolve/queue', [QueueController::class, 'resolve'])->name('queue.resolve');

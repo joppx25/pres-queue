@@ -31,7 +31,7 @@ if (! function_exists('home_route')) {
     function home_route()
     {
         if (auth()->check()) {
-            if (auth()->user()->isAdmin()) {
+            if (auth()->user()->isAdmin() || auth()->user()->isStaff()) {
                 return 'admin.dashboard';
             } elseif (auth()->user()->isBusiness()) {
                 return 'admin.business.dashboard';

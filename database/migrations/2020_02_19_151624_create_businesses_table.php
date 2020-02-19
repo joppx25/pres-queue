@@ -18,7 +18,7 @@ class CreateBusinessesTable extends Migration
             $table->unsignedInteger('user_id');
             $table->string('name', 255);
             $table->text('details');
-            $table->unsignedInteger('contact');
+            $table->string('contact', 25);
             $table->string('address', 255);
             
             $table->index('user_id', 'idx_user_id');

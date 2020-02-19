@@ -19,6 +19,7 @@ use App\Repositories\BaseRepository;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
 use App\Models\Business;
+use App\Models\Staff;
 
 /**
  * Class UserRepository.
@@ -30,10 +31,11 @@ class UserRepository extends BaseRepository
      *
      * @param  User  $model
      */
-    public function __construct(User $model, Business $businessModel)
+    public function __construct(User $model, Business $businessModel, Staff $staffModel)
     {
-        $this->model   = $model;
+        $this->model    = $model;
         $this->business = $businessModel;
+        $this->staff    = $staffModel;
     }
 
     /**
@@ -136,6 +138,14 @@ class UserRepository extends BaseRepository
                         'details' => $data['business_details'],
                         'contact' => $data['contact'],
                         'address' => $data['address'],
+                    ]);
+                } elseif (in_array('staff', $data['roles'])) {
+                    $this->staff->create([
+                        'user_id'     => $user->id,
+                        'business_id' => $data['business_id'],
+                        'name'        => $data['first_name'] . ' ' . $data['last_name'],
+                        'details'     => $data['details'],
+                        'image'       => $data['imageName'],
                     ]);
                 }
 

@@ -48,9 +48,9 @@
 
                         <div class="col-md-8 order-2 order-sm-1">
                             @php
-                                $qModel  = !is_null($queueUser)? $queueUser->queue->first() : 0;
+                                $qModel  = !is_null($queueUser)? $queueUser->queue : 0;
                                 $queueNo = 0;
-                                
+
                                 if ($qModel) {
                                     $queueNo = $qModel->queue_number;
                                 }

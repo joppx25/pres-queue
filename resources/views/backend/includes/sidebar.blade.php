@@ -27,6 +27,15 @@
                     </a>
                 </li>
             @endif
+            
+            @if ($logged_in_user->isStaff())
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('admin.queue.list') }}">
+                        <i class="nav-icon fas fa-landmark"></i>
+                        Queues
+                    </a>
+                </li>
+            @endif
 
             @if ($logged_in_user->isAdmin())
                 <li class="nav-title">
@@ -57,13 +66,6 @@
                                 @if ($pending_approval > 0)
                                     <span class="badge badge-danger">{{ $pending_approval }}</span>
                                 @endif
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link {{
-                                active_class(Route::is('admin/auth/role*'))
-                            }}" href="{{ route('admin.auth.role.index') }}">
-                                @lang('labels.backend.access.roles.management')
                             </a>
                         </li>
                     </ul>

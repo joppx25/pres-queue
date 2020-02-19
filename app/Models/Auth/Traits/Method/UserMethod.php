@@ -83,6 +83,14 @@ trait UserMethod
     {
         return $this->hasRole(config('access.users.business_role'));
     }
+    
+    /**
+     * @returnn mixed
+     */
+    public function isStaff()
+    {
+        return $this->hasRole('staff');
+    }
 
     /**
      * @return bool
