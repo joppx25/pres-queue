@@ -19,7 +19,7 @@
                         status: 2,
                     },
                     success: function (response) {
-                        console.log(response);
+                        if (response == 1) window.location.reload();
                     },
                     error: function (err) {
                         console.log(err);

@@ -11,4 +11,9 @@ class QueueUser extends Model
         'user_id',
         'status',
     ];
+    
+    public function queue()
+    {
+        return $this->belongsTo('App\Models\Queue', 'queue_id', 'id');
+    }
 }

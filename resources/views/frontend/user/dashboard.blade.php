@@ -47,11 +47,27 @@
                         </div><!--col-md-4-->
 
                         <div class="col-md-8 order-2 order-sm-1">
+                            @php
+                                $qModel  = !is_null($queueUser)? $queueUser->queue->first() : 0;
+                                $queueNo = 0;
+                                
+                                if ($qModel) {
+                                    $queueNo = $qModel->queue_number;
+                                }
+                            @endphp
                             @foreach ($businesses as $business)
+                                @php
+                                    $flag = $qModel && $business->id === $qModel->business_id;
+                                @endphp
                                 <div class="row">
                                     <div class="col">
                                         <div class="card mb-4">
-                                            <div class="card-header">{{ $business->name }}</div>
+                                            <div class="card-header">
+                                                {{ $business->name }}
+                                                @if ($queueNo && $flag)
+                                                    <span class="badge badge-primary">Priority No. {{ $queueNo }}</span>
+                                                @endif
+                                            </div>
                                             <div class="card-body">
                                                 <p class="card-text">{{ $business->details }}</p>
                                                 <p class="card-text">
@@ -61,7 +77,7 @@
                                                     </small>
                                                 </p>
                                             </div>
-                                            @if (!$business->queues->isEmpty()) 
+                                            @if (!$business->queues->isEmpty() && !$queueNo) 
                                                 <div class="card-footer">
                                                     <a href="javascript:void(0)" class="btn btn-primary reserve-queue" data-queue-id="{{ $business->queues->first()->id }}" data-business-id="{{ $business->id }}">Reserve</a>
                                                 </div>
