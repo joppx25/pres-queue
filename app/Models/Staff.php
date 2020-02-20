@@ -15,4 +15,9 @@ class Staff extends Model
         'details',
         'image',
     ];
+    
+    public function user()
+    {
+        return $this->belongsTo('App\Models\Auth\User', 'user_id', 'id');
+    }
 }

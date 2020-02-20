@@ -10,6 +10,7 @@ use App\Repositories\Backend\Auth\UserRepository;
 use App\Models\Window;
 use App\Models\Queue;
 use App\Models\QueueUser;
+use Hash;
 
 class StaffController extends Controller
 {
@@ -51,6 +52,44 @@ class StaffController extends Controller
         
         $data['imageName'] = $imageName;
         $this->userRepo->create($data);
+        
+        return redirect()->route('admin.business.staff');
+    }
+    
+    public function edit($id)
+    {
+        $staff = Staff::where('id', $id)->with('user')->first();
+        return view('backend.business.staff.edit', compact('staff'));
+    }
+    
+    public function update(Request $request)
+    {
+        $data = $request->all();
+        $imageName = '';
+        
+        if ($request->hasFile('image')) {
+            request()->validate([
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+            
+            $imageName = time() . '.' . request()->image->getClientOriginalExtension();
+            request()->image->move(public_path('images'), $imageName);
+        }
+        
+        $result = Staff::where('id', $data['id'])->update([
+            'name'    => $data['first_name'] . ' ' . $data['last_name'],
+            'details' => $data['details'],
+            'image'   => $imageName,
+        ]);
+        
+        if ($result) {
+            $user = User::where('id', $data['user_id'])->update([
+                'first_name' => $data['first_name'],
+                'last_name'  => $data['last_name'],
+                'email'      => $data['email'],
+                'password'   => Hash::make($data['password']),
+            ]);
+        }
         
         return redirect()->route('admin.business.staff');
     }

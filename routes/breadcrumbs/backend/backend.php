@@ -44,6 +44,10 @@ Breadcrumbs::for('admin.business.staff.create', function ($trail) {
     $trail->push('Create staff', route('admin.business.staff.create'));
 });
 
+Breadcrumbs::for('admin.business.staff.edit', function ($trail, $id) {
+    $trail->push('Edit staff', route('admin.business.staff.edit', ['id' => $id]));
+});
+
 Breadcrumbs::for('admin.queue.list', function ($trail) {
     $trail->push('Queues', route('admin.queue.list'));
 });
