@@ -39,7 +39,6 @@ class WindowController extends Controller
     {
         $businessId = $this->getBusinessId();
         $staffs     = Staff::where('business_id', $businessId)->get();
-        dd($staffs);
         return view('backend.business.window.create', compact('businessId', 'staffs'));
     }
     
